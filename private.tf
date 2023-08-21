@@ -36,7 +36,8 @@ resource "aws_subnet" "private" {
           "-",
           var.delimiter,
         ),
-      )
+      ),
+      "karpenter.sh/discovery" = "eks"
     },
   )
 
