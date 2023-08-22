@@ -5,7 +5,8 @@ module "private_label" {
   tags = merge(
     module.label.tags,
     {
-      "${var.subnet_type_tag_key}" = format(var.subnet_type_tag_value_format, "private")
+      "${var.subnet_type_tag_key}" = format(var.subnet_type_tag_value_format, "private"),
+      "karpenter.sh/discovery" = "eks"
     },
   )
 }
@@ -36,19 +37,18 @@ resource "aws_subnet" "private" {
           "-",
           var.delimiter,
         ),
-      ),
-      "karpenter.sh/discovery" = "eks"
+      )
     },
   )
 
-  lifecycle {
-    # Ignore tags added by kops or kubernetes
-    ignore_changes = [
-      tags,
-      tags.kubernetes,
-      tags.SubnetType,
-    ]
-  }
+  # lifecycle {
+  #   # Ignore tags added by kops or kubernetes
+  #   ignore_changes = [
+  #     tags,
+  #     tags.kubernetes,
+  #     tags.SubnetType,
+  #   ]
+  # }
 }
 
 resource "aws_route_table" "private" {
