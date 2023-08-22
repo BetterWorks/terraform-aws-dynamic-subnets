@@ -40,14 +40,14 @@ resource "aws_subnet" "private" {
     },
   )
 
-  # lifecycle {
-  #   # Ignore tags added by kops or kubernetes
-  #   ignore_changes = [
-  #     tags,
-  #     tags.kubernetes,
-  #     tags.SubnetType,
-  #   ]
-  # }
+  lifecycle {
+    # Ignore tags added by kops or kubernetes
+    ignore_changes = [
+      #tags,
+      tags.kubernetes,
+      tags.SubnetType,
+    ]
+  }
 }
 
 resource "aws_route_table" "private" {
