@@ -44,6 +44,8 @@ resource "aws_subnet" "private" {
     # Ignore tags added by kops or kubernetes
     ignore_changes = [
       tags,
+      tags.kubernetes,
+      tags.SubnetType,
     ]
   }
 }
