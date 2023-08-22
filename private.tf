@@ -5,8 +5,7 @@ module "private_label" {
   tags = merge(
     module.label.tags,
     {
-      "${var.subnet_type_tag_key}" = format(var.subnet_type_tag_value_format, "private"),
-      "karpenter.sh/discovery" = "eks"
+      "${var.subnet_type_tag_key}" = format(var.subnet_type_tag_value_format, "private")
     },
   )
 }
@@ -37,7 +36,8 @@ resource "aws_subnet" "private" {
           "-",
           var.delimiter,
         ),
-      )
+      ),
+      "karpenter.sh/discovery" = "eks"
     },
   )
 
