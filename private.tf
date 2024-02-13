@@ -43,7 +43,6 @@ resource "aws_subnet" "private" {
   lifecycle {
     # Ignore tags added by kops or kubernetes
     ignore_changes = [
-      tags["kubernetes.io/cluster/eks"],
       tags.kubernetes,
       tags.SubnetType,
     ]
