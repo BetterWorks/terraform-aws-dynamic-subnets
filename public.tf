@@ -38,13 +38,12 @@ resource "aws_subnet" "public" {
           var.delimiter,
         ),
       )
-    },
+    }, var.extra_public_subnet_tags
   )
 
   lifecycle {
     # Ignore tags added by kops or kubernetes
     ignore_changes = [
-      tags,
       tags.kubernetes,
       tags.SubnetType,
     ]
